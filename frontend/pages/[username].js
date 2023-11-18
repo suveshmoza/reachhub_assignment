@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/context/useAuth';
-import RatingChart from '@/components/RatingChar';
+import RatingChart from '@/components/RatingChart';
+import RatingHistoryList from '@/components/RatingHistoryList';
 
 const RatingHistory = () => {
 	const router = useRouter();
@@ -41,22 +42,10 @@ const RatingHistory = () => {
 	return (
 		<div className="max-w-8xl h-[calc(100vh-60px)] mx-auto pt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
 			<div>
-				<h1 className="text-2xl font-bold mb-4">
-					Rating History for {username}
+				<h1 className="text-2xl mb-4">
+					Rating History for <span className="font-bold ">{username}</span>
 				</h1>
-				<ul className="overflow-y-scroll max-h-[80vh]">
-					{sortedRatingHistory.map((entry) => (
-						<li
-							key={entry.date}
-							className="mb-4 p-4 border border-gray-300 rounded"
-						>
-							<p className="text-gray-500">
-								Date: {new Date(entry.date).toLocaleDateString()}
-							</p>
-							<p className="text-gray-500">Rating: {entry.rating}</p>
-						</li>
-					))}
-				</ul>
+				<RatingHistoryList sortedRatingHistory={sortedRatingHistory} />
 			</div>
 			<div className="h-full w-full">
 				<RatingChart data={sortedRatingHistory} />

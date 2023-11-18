@@ -1,4 +1,3 @@
-import React from 'react';
 import {
 	LineChart,
 	Line,
@@ -21,7 +20,7 @@ const RatingChart = ({ data }) => {
 			>
 				<CartesianGrid strokeDasharray="5 5" />
 				<XAxis dataKey="date" />
-				<YAxis />
+				<YAxis dataKey="rating" />
 				<Tooltip />
 				<Legend />
 				<Line
