@@ -41,7 +41,7 @@ This repository contains the backend implementation of the Reachhub Assignment, 
     python app.py
     ```
 7. Once everything is set-up and running, we have to run some scripts that extracts data from Lichess API and store it inside our PostgreSQL
-   For this there are some python scripts inside the scripts folder. Navigate to this repository and run these files in the following order:
+   For this there are some python scripts inside the scripts folder. But before running them you will have to configure the db params for each script and also create a Lichess API token for the scripts to retrieve data. After, this navigate to this repository and run these files in the following order:
    ```
    1. setup_db.py -> this creates a player table which has player username,id and classical rating of that user
    2. setup_top50 -> this creates a top_players  table which contains top 50 players from the classical category based on their rating
