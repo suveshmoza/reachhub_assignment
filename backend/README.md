@@ -31,16 +31,18 @@ This repository contains the backend implementation of the Reachhub Assignment, 
     SECRET_KEY="SECRET KEY FOR JWT"
     ```
 5. Database Migrations
-    Apply Alembic migrations to set up the database:
+
+    Create a new database in your PostgreSQL and use this new database in the .env file for `DB_NAME` and also for running the scripts in Step. 8.
+    After that, apply Alembic migrations to set up the database:
     ```
     alembic upgrade head
     ```
-6. Running the Application
+7. Running the Application
     Ensure you have PostgreSQL running. You can also use a containarized PostgreSQL db using docker. Run the FastAPI application:
     ```
     python app.py
     ```
-7. Once everything is set-up and running, we have to run some scripts that extracts data from Lichess API and store it inside our PostgreSQL
+8. Once everything is set-up and running, we have to run some scripts that extracts data from Lichess API and store it inside our PostgreSQL
    For this there are some python scripts inside the scripts folder. But before running them you will have to configure the db params for each script and also create a Lichess API token for the scripts to retrieve data. After, this navigate to this repository and run these files in the following order:
    ```
    1. setup_db.py -> this creates a player table which has player username,id and classical rating of that user
@@ -51,12 +53,18 @@ This repository contains the backend implementation of the Reachhub Assignment, 
    but you can uncomment the line 111 and comment the line 112 of the setup_history.py file, then it will fetch history of all the users.
 
 # Endpoints
-
-1. `/top-players`: Retrieves a list of the top 50 classical chess players.
-2. `/player/{username}/rating-history`: Retrieves the 30-day rating history for a specified player.
-3. `/players/rating-history-csv`: Generates and provides a CSV file with the rating history for the top 50 players.
+| Endpoint               | Type     | Parameter | Description                                       | Response                                                                                                   |
+|------------------------|----------|-----------|---------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `/top_players`         | `GET`    | None      | Retrieves the top 50 players based on their ratings. | ```[{ "id": "player1", "username": Apodex64, "rating": 2351 }, // ... (up to 50 players) ]``` |
+| `/player/{username}/rating-history` | `GET` | `username` | Retrieves the rating history of a specific player. | ```[{ "username": "string", "date": "2023-11-22T11:44:27.956Z", "rating": 0 }], // ... (history entries) ]```           |
+| `/player/rating-history-csv` | `GET`    | None      | Generates and returns a CSV file containing the rating history of the top 50 players for the last 30 days. | A CSV file containing the rating history of the top 50 players for the last 30 days. |
 
 *All of the above routes require user authentication*
+| Endpoint               | Type  | Parameter     | Description                                      | Response                                                                |
+|------------------------|-------|---------------|--------------------------------------------------|-------------------------------------------------------------------------|
+| `/signup`              | `POST`| `user_data`   | User creation data including username, email, and password. | `{"message": "User has been created"}`|                                                                    |
+| `/login`               | `POST`| `user_data`   | User login data including username and password. | Token including `access_token` and `token_type`.|
+
 # Optimizations that can be made to improve performance 
   1. We can use caching mechanisms to store frequently accessed data temporarily. For example, caching the response of the /top-players endpoint can reduce the load on the server, because the top-players list is      updated after every 24 hours.
   2. Optimize database queries by selecting only the necessary columns and rows.
