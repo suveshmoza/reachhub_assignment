@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { useAuth } from '@/context/useAuth';
-import PlayerCard from '@/components/PlayerCard';
-import PlayerCardSkeleton from '@/components/PlayerCardSkeleton';
-import PlayerGridWrapper from '@/components/PlayerGridWrapper';
+import { useAuth } from '@/context/authContext';
+import {
+	PlayerCard,
+	PlayerCardSkeleton,
+	PlayerGridWrapper,
+} from '@/components/PlayerCard';
 
 const PlayerList = () => {
 	const [players, setPlayers] = useState([]);
@@ -50,8 +52,8 @@ const PlayerList = () => {
 				Top 50 Classical Players
 			</h1>
 			<PlayerGridWrapper>
-				{players.map((player) => (
-					<PlayerCard key={player.id} {...player} />
+				{players.map((player, index) => (
+					<PlayerCard key={player.id} {...player} rank={index + 1} />
 				))}
 			</PlayerGridWrapper>
 		</>

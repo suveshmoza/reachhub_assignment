@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { useAuth } from '@/context/useAuth';
+import { useAuth } from '@/context/authContext';
 import RatingChart from '@/components/RatingChart';
 import RatingHistoryList from '@/components/RatingHistoryList';
 

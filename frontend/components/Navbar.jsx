@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useAuth } from '@/context/useAuth';
+import { useAuth } from '@/context/authContext';
 import { useState } from 'react';
 
 const Navbar = () => {

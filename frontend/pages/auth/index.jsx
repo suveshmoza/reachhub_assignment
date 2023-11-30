@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { userSignUp, userLogIn } from '@/utils/auth';
 import { useRouter } from 'next/router';
-import { useAuth } from '@/context/useAuth';
-import InputField from '@/components/InputField';
-import Button from '@/components/Button';
+import { useAuth } from '@/context/authContext';
+import InputField from '@/components/ui/InputField';
+import Button from '@/components/ui/Button';
 import Notification from '@/components/Notification';
 
 const AuthForm = () => {
@@ -163,7 +163,7 @@ const AuthForm = () => {
 								setIsSignUp(!isSignUp);
 								setUserCreated(false);
 							}}
-							className="text-indigo-600 hover:underline focus:outline-none pl-2 focus:ring focus:border-indigo-300"
+							className="text-indigo-600 hover:underline focus:outline-none pl-2"
 						>
 							{isSignUp ? 'Log In' : 'Sign Up'}
 						</button>

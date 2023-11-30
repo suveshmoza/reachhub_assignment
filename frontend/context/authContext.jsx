@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
 		if (storedToken) {
 			setUserToken(storedToken);
 		}
-		setLoading(false); // Set loading to false once the token is retrieved
+		setLoading(false);
 	}, []);
 
 	const setTokenOnLogin = (token) => {
@@ -30,16 +30,13 @@ export const AuthProvider = ({ children }) => {
 		localStorage.removeItem('userToken');
 	};
 
-	// Add the redirection logic here
 	useEffect(() => {
-		// Redirect only if the loading is false and the userToken is present
-		if (!loading && !userToken) {
+		if (!loading && !userToken && router.pathname !== '/auth') {
 			router.push('/auth');
 		}
 	}, [userToken, loading, router]);
 
 	if (loading) {
-		// You can render a loading state if needed
 		return <p>Loading...</p>;
 	}
 
