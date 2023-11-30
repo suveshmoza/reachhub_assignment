@@ -4,7 +4,7 @@ from core.user.routes import user_router
 from core.rating.routes import rating_router
 from fastapi.middleware.cors import CORSMiddleware
 
-app=FastAPI()
+app=FastAPI(title="ReachHub Assignment")
 
 origins = [
     "*"
